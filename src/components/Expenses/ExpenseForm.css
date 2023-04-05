@@ -1,0 +1,7 @@
+form,p {
+  color: lightcyan;
+}
+
+form > input,button{
+  border-radius: 4px;
+}
