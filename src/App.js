@@ -1,11 +1,11 @@
+import { useState } from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import ExpenseForm from "./components/Expenses/ExpenseForm";
 import Card from "./components/UI/Card";
-
 import "./components/Expenses/Expenses.css";
 
 function App() {
-  const expenses = [
+  const [expenses, setExpenses] = useState([
     {
       date: new Date(2021, 2, 28),
       title: "Car Insurance",
@@ -30,7 +30,12 @@ function App() {
       amount: 10294.67,
       locationOfExpenditure: "Banglore",
     },
-  ];
+  ]);
+
+  const addExpense = (expense) => {
+    setExpenses((expenses) => [...expenses, expense]);
+    console.log(expense);
+  };
 
   const expenseItems = expenses.map((expense) => (
     <ExpenseItem expense={expense} />
@@ -40,7 +45,7 @@ function App() {
     <div>
       <h2>Let's get started!</h2>
       <Card className="expenses">
-        <ExpenseForm />
+        <ExpenseForm onExpenseSave={addExpense} />
         {expenseItems}
       </Card>
     </div>

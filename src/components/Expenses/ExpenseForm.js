@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onExpenseSave }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const expense = {
@@ -9,7 +9,10 @@ const ExpenseForm = () => {
       amount: enteredAmount,
       date: new Date(enteredDate),
     };
-    console.log(expense);
+    onExpenseSave(expense);
+    setEnteredAmount("");
+    setEnteredDate("");
+    setEnteredTitle("");
   };
 
   const changeTitleHandler = (e) => {
@@ -36,6 +39,7 @@ const ExpenseForm = () => {
           type="text"
           id="title"
           name="title"
+          value={enteredTitle}
           onChange={changeTitleHandler}
         ></input>
         <label for="amount">Expense Amount:</label>
@@ -43,6 +47,7 @@ const ExpenseForm = () => {
           type="number"
           id="amount"
           name="amount"
+          value={enteredAmount}
           onChange={changeAmountHandler}
         ></input>
         <label for="date">Date:</label>
@@ -50,13 +55,11 @@ const ExpenseForm = () => {
           type="date"
           id="date"
           name="date"
+          value={enteredDate}
           onChange={changeDateHandler}
         ></input>
         <button type="submit">Add Expense</button>
       </form>
-      <p>
-        {enteredTitle} {enteredAmount} {enteredDate}
-      </p>
     </>
   );
 };
