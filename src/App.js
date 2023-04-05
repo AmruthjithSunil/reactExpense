@@ -51,17 +51,17 @@ function App() {
     console.log(expense);
   };
 
-  // const expenseItems = filteredExpenses.length ? (
-  //   filteredExpenses.map((expense) => (
-  //     <ExpenseItem key={expense.id} expense={expense} />
-  //   ))
-  // ) : (
-  //   <p>no lists</p>
-  // );
+  const expenseItems = filteredExpenses.length ? (
+    filteredExpenses.map((expense) => (
+      <ExpenseItem key={expense.id} expense={expense} />
+    ))
+  ) : (
+    <p>no lists</p>
+  );
 
-  const expenseItems = filteredExpenses.map((expense) => (
-    <ExpenseItem key={expense.id} expense={expense} />
-  ));
+  if (filteredExpenses.length == 1) {
+    expenseItems.push(<p>Only single expense here please add more</p>);
+  }
 
   return (
     <div>
