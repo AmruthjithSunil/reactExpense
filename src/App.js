@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import ExpenseForm from "./components/Expenses/ExpenseForm";
+import ExpenseChart from "./components/Expenses/ExpenseChart";
 import Card from "./components/UI/Card";
 import "./components/Expenses/Expenses.css";
 import FilterExpense from "./components/Expenses/FilterExpense";
@@ -69,6 +70,7 @@ function App() {
       <Card className="expenses">
         <ExpenseForm onExpenseSave={addExpense} />
         <FilterExpense onFilterChange={filterChangeHandler} />
+        <ExpenseChart expenses={filteredExpenses} />
         {expenseItems}
       </Card>
     </div>
