@@ -3,6 +3,7 @@ import ExpenseItem from "./components/Expenses/ExpenseItem";
 import ExpenseForm from "./components/Expenses/ExpenseForm";
 import Card from "./components/UI/Card";
 import "./components/Expenses/Expenses.css";
+import FilterExpense from "./components/Expenses/FilterExpense";
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -36,12 +37,29 @@ function App() {
     },
   ]);
 
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
+
+  const filterChangeHandler = (year) => {
+    const temp = expenses.filter(
+      (expense) => expense.date.getFullYear().toString() == year
+    );
+    setFilteredExpenses(temp);
+  };
+
   const addExpense = (expense) => {
     setExpenses((expenses) => [expense, ...expenses]);
     console.log(expense);
   };
 
-  const expenseItems = expenses.map((expense) => (
+  // const expenseItems = filteredExpenses.length ? (
+  //   filteredExpenses.map((expense) => (
+  //     <ExpenseItem key={expense.id} expense={expense} />
+  //   ))
+  // ) : (
+  //   <p>no lists</p>
+  // );
+
+  const expenseItems = filteredExpenses.map((expense) => (
     <ExpenseItem key={expense.id} expense={expense} />
   ));
 
@@ -50,6 +68,7 @@ function App() {
       <h2>Let's get started!</h2>
       <Card className="expenses">
         <ExpenseForm onExpenseSave={addExpense} />
+        <FilterExpense onFilterChange={filterChangeHandler} />
         {expenseItems}
       </Card>
     </div>
