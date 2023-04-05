@@ -2,6 +2,16 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const expense = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+    console.log(expense);
+  };
+
   const changeTitleHandler = (e) => {
     setEnteredTitle(e.target.value);
   };
@@ -20,7 +30,7 @@ const ExpenseForm = () => {
 
   return (
     <>
-      <form>
+      <form onSubmit={submitHandler}>
         <label for="title">Expense Title:</label>
         <input
           type="text"
